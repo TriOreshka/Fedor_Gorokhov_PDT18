@@ -1,3 +1,14 @@
+/***
+ * TestBase.java
+ * 
+ * Created on May 19-20, 2014 as home task 1&2 for training 
+ * "Programming For Testers" by Software-testing.ru 
+ * (http://www.software-testing.ru/events/864-programming-for-testers-new) 
+ * 
+ * Base test class, contains low-level implementation of all methods,
+ * including setUp and tearDown  
+ *  
+ */
 package com.example.tests;
 
 import static org.junit.Assert.fail;
@@ -9,9 +20,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.NoSuchElementException;
+// import org.openqa.selenium.Alert;
+// import org.openqa.selenium.NoAlertPresentException;
+// import org.openqa.selenium.NoSuchElementException;
 
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -38,13 +49,29 @@ public class TestBase {
 	      fail(verificationErrorString);
 	    }
 	}
+
+	protected void openMainPage() {
+	    driver.get(baseUrl + "/addressbookv4.1.4/");
+	}
 	
-	protected void returnToGroupsPage() {
-		driver.findElement(By.linkText("group page")).click();
+	protected void initGroupCreation() {
+		findElement(By.name("new")).click();
 	}
 
+	protected void gotoGroupsPage() {
+		findElement(By.cssSelector("a[href=\"group.php\"]")).click();
+	}
+
+	protected void gotoAddNewPage() {
+		findElement(By.cssSelector("a[href=\"edit.php\"]")).click();
+	}
+	
+	protected void returnToHomePage() {
+		findElement(By.cssSelector("a[href=\"./\"]")).click();
+	}
+	
 	protected void submitButtonClick() {
-	    driver.findElement(By.name("submit")).click();
+		findElement(By.name("submit")).click();
 	}
 
 	protected void fillGroupForm(GroupData group) {
@@ -62,10 +89,10 @@ public class TestBase {
 		findAndFill(By.name("work"), address.work_phone);
 		findAndFill(By.name("email"), address.email_1);
 		findAndFill(By.name("email2"), address.email_2);
-		new Select(driver.findElement(By.name("bday"))).selectByVisibleText("21");
-		new Select(driver.findElement(By.name("bmonth"))).selectByVisibleText("May");
+		selectAndFill(By.name("bday"),"21");
+		selectAndFill(By.name("bmonth"),"May");
 		findAndFill(By.name("byear"), address.bday_year);
-		// new Select(driver.findElement(By.name("new_group"))).selectByVisibleText("Rob");
+		// selectAndFill(By.name("new_group"),"Rob");
 		findAndFill(By.name("address2"), address.secondary_address_text);
 		findAndFill(By.name("phone2"), address.secondary_home_phone);
 	}
@@ -82,31 +109,17 @@ public class TestBase {
 		element.sendKeys(text);
 	}
 	
+	protected void selectAndFill(By locator, String text) {
+		if (text == "" || text == null)
+			return;
+		new Select(findElement(locator)).selectByVisibleText(text);;
+	}	
 	/*private void clearAndFill(String searchBy, String typeIn) {
 		driver.findElement(By.name(searchBy)).clear();
 	    driver.findElement(By.name(searchBy)).sendKeys(typeIn);
 	}*/
 
-	protected void initGroupCreation() {
-	    driver.findElement(By.name("new")).click();
-	}
-
-	protected void gotoGroupsPage() {
-	    driver.findElement(By.linkText("groups")).click();
-	}
-
-	protected void gotoAddNewPage() {
-	    driver.findElement(By.linkText("add new")).click();
-	}
-	
-	protected void openMainPage() {
-	    driver.get(baseUrl + "/addressbookv4.1.4/");
-	}
-
-	protected void returnToHomePage() {
-		driver.findElement(By.linkText("home page")).click();
-	}
-
+/*
 	private boolean isElementPresent(By by) {
 	    try {
 	      driver.findElement(by);
@@ -139,4 +152,5 @@ public class TestBase {
 	      acceptNextAlert = true;
 	    }
 	}
+*/
 }

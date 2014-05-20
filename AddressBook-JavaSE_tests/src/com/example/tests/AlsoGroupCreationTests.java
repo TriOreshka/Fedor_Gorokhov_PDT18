@@ -15,7 +15,7 @@ public class AlsoGroupCreationTests extends TestBase {
     group.footer = "footer 1";
 	fillGroupForm(group);
     submitButtonClick();
-    returnToGroupsPage();
+    gotoGroupsPage();
   }
 
   @Test
@@ -25,6 +25,6 @@ public class AlsoGroupCreationTests extends TestBase {
     initGroupCreation();
     fillGroupForm(new GroupData("", "", ""));
     submitButtonClick();
-    returnToGroupsPage();
+    gotoGroupsPage();
   }*/
  }
