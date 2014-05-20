@@ -1,14 +1,18 @@
 package com.example.tests;
 
 import static org.junit.Assert.fail;
+
 import java.util.concurrent.TimeUnit;
-import org.openqa.selenium.Alert;
+
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.NoSuchElementException;
+
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
@@ -44,32 +48,44 @@ public class TestBase {
 	}
 
 	protected void fillGroupForm(GroupData group) {
-	    clearAndFill("group_name", group.name);
-	    clearAndFill("group_header", group.header);
-	    clearAndFill("group_footer", group.footer);
+	    findAndFill(By.name("group_name"), group.name);
+	    findAndFill(By.name("group_header"), group.header);
+	    findAndFill(By.name("group_footer"), group.footer);
 	}
 
 	protected void fillAddNewAddressForm(AddressData address) {
-		clearAndFill("firstname", address.first_name);
-		clearAndFill("lastname", address.last_name);
-		clearAndFill("address", address.address_text);
-		clearAndFill("home", address.home_number);
-		clearAndFill("mobile", address.mobile_phone);
-		clearAndFill("work", address.work_phone);
-		clearAndFill("email", address.email_1);
-		clearAndFill("email2", address.email_2);
+		findAndFill(By.name("firstname"), address.first_name);
+		findAndFill(By.name("lastname"), address.last_name);
+		findAndFill(By.name("address"), address.address_text);
+		findAndFill(By.name("home"), address.home_number);
+		findAndFill(By.name("mobile"), address.mobile_phone);
+		findAndFill(By.name("work"), address.work_phone);
+		findAndFill(By.name("email"), address.email_1);
+		findAndFill(By.name("email2"), address.email_2);
 		new Select(driver.findElement(By.name("bday"))).selectByVisibleText("21");
 		new Select(driver.findElement(By.name("bmonth"))).selectByVisibleText("May");
-		clearAndFill("byear", address.bday_year);
+		findAndFill(By.name("byear"), address.bday_year);
 		// new Select(driver.findElement(By.name("new_group"))).selectByVisibleText("Rob");
-		clearAndFill("address2", address.secondary_address_text);
-		clearAndFill("phone2", address.secondary_home_phone);
+		findAndFill(By.name("address2"), address.secondary_address_text);
+		findAndFill(By.name("phone2"), address.secondary_home_phone);
 	}
 	
-	private void clearAndFill(String searchBy, String typeIn) {
+	protected WebElement findElement(By locator) {
+		return driver.findElement(locator);
+	}
+
+	protected void findAndFill(By locator, String text) {
+		if (text == "" || text == null)
+			return;
+		WebElement element = findElement(locator);
+		element.clear();
+		element.sendKeys(text);
+	}
+	
+	/*private void clearAndFill(String searchBy, String typeIn) {
 		driver.findElement(By.name(searchBy)).clear();
 	    driver.findElement(By.name(searchBy)).sendKeys(typeIn);
-	}
+	}*/
 
 	protected void initGroupCreation() {
 	    driver.findElement(By.name("new")).click();
@@ -87,6 +103,9 @@ public class TestBase {
 	    driver.get(baseUrl + "/addressbookv4.1.4/");
 	}
 
+	protected void returnToHomePage() {
+		driver.findElement(By.linkText("home page")).click();
+	}
 
 	private boolean isElementPresent(By by) {
 	    try {
@@ -95,7 +114,7 @@ public class TestBase {
 	    } catch (NoSuchElementException e) {
 	      return false;
 	    }
-	  }
+	}
 
 	private boolean isAlertPresent() {
 	    try {
@@ -104,7 +123,7 @@ public class TestBase {
 	    } catch (NoAlertPresentException e) {
 	      return false;
 	    }
-	  }
+	}
 
 	private String closeAlertAndGetItsText() {
 	    try {
@@ -119,12 +138,5 @@ public class TestBase {
 	    } finally {
 	      acceptNextAlert = true;
 	    }
-	  }
-
-	protected void returnToHomePage() {
-		driver.findElement(By.linkText("home page")).click();
 	}
-
-
-
 }

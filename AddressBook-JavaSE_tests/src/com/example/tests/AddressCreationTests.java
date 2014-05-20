@@ -9,7 +9,7 @@ public class AddressCreationTests extends TestBase {
 	openMainPage();
 	gotoAddNewPage();
 	
-	AddressData gollum = new AddressData(null, null, null, null, null, null, null, null, null, null, null, null, null);
+	AddressData gollum = new AddressData();
 	gollum.first_name = "On rodilsya";
 	gollum.last_name = "I vyros`";
 	gollum.address_text = "Na \nYlitse \nLenina";

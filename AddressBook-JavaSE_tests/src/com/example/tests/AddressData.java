@@ -15,6 +15,9 @@ public class AddressData {
 	public String secondary_address_text;
 	public String secondary_home_phone;
 
+	public AddressData() {
+	}
+	
 	public AddressData(String first_name, String last_name,
 			String address_text, String home_number, String mobile_phone,
 			String work_phone, String email_1, String email_2, String bday, String bmonth,
