@@ -17,11 +17,11 @@ public class AddressData {
 
 	public AddressData() {
 	}
-	
+
 	public AddressData(String first_name, String last_name,
 			String address_text, String home_number, String mobile_phone,
-			String work_phone, String email_1, String email_2, String bday, String bmonth,
-			String bday_year, String secondary_address_text,
+			String work_phone, String email_1, String email_2, String bday,
+			String bmonth, String bday_year, String secondary_address_text,
 			String secondary_home_phone) {
 		this.first_name = first_name;
 		this.last_name = last_name;

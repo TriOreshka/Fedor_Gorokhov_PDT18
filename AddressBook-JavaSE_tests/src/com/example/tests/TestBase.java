@@ -31,29 +31,29 @@ public class TestBase {
 
 	private static WebDriver driver;
 	private static String baseUrl;
-	private static boolean acceptNextAlert = true;
+	// private static boolean acceptNextAlert = true;
 	private static StringBuffer verificationErrors = new StringBuffer();
 
 	@BeforeTest
 	public void setUp() throws Exception {
-	    driver = new FirefoxDriver();
-	    baseUrl = "http://localhost/";
-	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver = new FirefoxDriver();
+		baseUrl = "http://localhost/";
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 
 	@AfterTest
 	public void tearDown() throws Exception {
-	    driver.quit();
-	    String verificationErrorString = verificationErrors.toString();
-	    if (!"".equals(verificationErrorString)) {
-	      fail(verificationErrorString);
-	    }
+		driver.quit();
+		String verificationErrorString = verificationErrors.toString();
+		if (!"".equals(verificationErrorString)) {
+			fail(verificationErrorString);
+		}
 	}
 
 	protected void openMainPage() {
-	    driver.get(baseUrl + "/addressbookv4.1.4/");
+		driver.get(baseUrl + "/addressbookv4.1.4/");
 	}
-	
+
 	protected void initGroupCreation() {
 		findElement(By.name("new")).click();
 	}
@@ -65,19 +65,19 @@ public class TestBase {
 	protected void gotoAddNewPage() {
 		findElement(By.cssSelector("a[href=\"edit.php\"]")).click();
 	}
-	
+
 	protected void returnToHomePage() {
 		findElement(By.cssSelector("a[href=\"./\"]")).click();
 	}
-	
+
 	protected void submitButtonClick() {
 		findElement(By.name("submit")).click();
 	}
 
 	protected void fillGroupForm(GroupData group) {
-	    findAndFill(By.name("group_name"), group.name);
-	    findAndFill(By.name("group_header"), group.header);
-	    findAndFill(By.name("group_footer"), group.footer);
+		findAndFill(By.name("group_name"), group.name);
+		findAndFill(By.name("group_header"), group.header);
+		findAndFill(By.name("group_footer"), group.footer);
 	}
 
 	protected void fillAddNewAddressForm(AddressData address) {
@@ -89,14 +89,14 @@ public class TestBase {
 		findAndFill(By.name("work"), address.work_phone);
 		findAndFill(By.name("email"), address.email_1);
 		findAndFill(By.name("email2"), address.email_2);
-		selectAndFill(By.name("bday"),"21");
-		selectAndFill(By.name("bmonth"),"May");
+		selectAndFill(By.name("bday"), "21");
+		selectAndFill(By.name("bmonth"), "May");
 		findAndFill(By.name("byear"), address.bday_year);
 		// selectAndFill(By.name("new_group"),"Rob");
 		findAndFill(By.name("address2"), address.secondary_address_text);
 		findAndFill(By.name("phone2"), address.secondary_home_phone);
 	}
-	
+
 	protected WebElement findElement(By locator) {
 		return driver.findElement(locator);
 	}
@@ -108,49 +108,29 @@ public class TestBase {
 		element.clear();
 		element.sendKeys(text);
 	}
-	
+
 	protected void selectAndFill(By locator, String text) {
 		if (text == "" || text == null)
 			return;
-		new Select(findElement(locator)).selectByVisibleText(text);;
-	}	
-	/*private void clearAndFill(String searchBy, String typeIn) {
-		driver.findElement(By.name(searchBy)).clear();
-	    driver.findElement(By.name(searchBy)).sendKeys(typeIn);
-	}*/
-
-/*
-	private boolean isElementPresent(By by) {
-	    try {
-	      driver.findElement(by);
-	      return true;
-	    } catch (NoSuchElementException e) {
-	      return false;
-	    }
+		new Select(findElement(locator)).selectByVisibleText(text);
+		;
 	}
+	/*
+	 * private void clearAndFill(String searchBy, String typeIn) {
+	 * driver.findElement(By.name(searchBy)).clear();
+	 * driver.findElement(By.name(searchBy)).sendKeys(typeIn); }
+	 */
 
-	private boolean isAlertPresent() {
-	    try {
-	      driver.switchTo().alert();
-	      return true;
-	    } catch (NoAlertPresentException e) {
-	      return false;
-	    }
-	}
-
-	private String closeAlertAndGetItsText() {
-	    try {
-	      Alert alert = driver.switchTo().alert();
-	      String alertText = alert.getText();
-	      if (acceptNextAlert) {
-	        alert.accept();
-	      } else {
-	        alert.dismiss();
-	      }
-	      return alertText;
-	    } finally {
-	      acceptNextAlert = true;
-	    }
-	}
-*/
+	/*
+	 * private boolean isElementPresent(By by) { try { driver.findElement(by);
+	 * return true; } catch (NoSuchElementException e) { return false; } }
+	 * 
+	 * private boolean isAlertPresent() { try { driver.switchTo().alert();
+	 * return true; } catch (NoAlertPresentException e) { return false; } }
+	 * 
+	 * private String closeAlertAndGetItsText() { try { Alert alert =
+	 * driver.switchTo().alert(); String alertText = alert.getText(); if
+	 * (acceptNextAlert) { alert.accept(); } else { alert.dismiss(); } return
+	 * alertText; } finally { acceptNextAlert = true; } }
+	 */
 }
