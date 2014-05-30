@@ -14,46 +14,45 @@ import org.testng.annotations.Test;
 
 public class ContactCreationTests extends TestBase {
 
-	/**
-	 * Test 1 - creates ContactData object named gollum (@JRRT), fill it with
-	 * data, and invokes program to create address with given parameters
-	 */
 	@Test
-	public void testNonEmptyContactCreation() throws Exception {
+	public void notEmptyContactCreation() throws Exception {
 		app.getNavigationHelper().openMainPage();
 		app.getContactHelper().initContactCreation();
 
-		ContactData gollum = new ContactData();
-		gollum.first_name = "On rodilsya";
-		gollum.last_name = "I vyros`";
-		gollum.address_text = "Na \nYlitse \nLenina";
-		gollum.home_number = "I ego";
-		gollum.mobile_phone = "Zarubaet";
-		gollum.work_phone = "Vremya ot vremeni";
-		gollum.email_1 = "www.leningrad@spb.ru";
-		gollum.email_2 = "oh@ru!";
-		gollum.bday = "21";
-		gollum.bmonth = "May";
-		gollum.bday_year = "2014";
-		gollum.secondary_address_text = "Secondary Address:\nMulholland Drive,"
-				+ " 2014";
-		gollum.secondary_home_phone = "Home Sweet Home!";
+		ContactData contact = new ContactData();
+		contact.first_name = app.randLetters(8);
+		contact.last_name = app.randLetters(12);
+		contact.address_text = app.randAll(30);
+		contact.home_number = app.randPhone();
+		contact.mobile_phone = app.randPhone();
+		contact.work_phone = app.randPhone();
+		contact.email_1 = app.randLetters(10) + "@" + app.randLetters(5) + ".ru";
+		contact.email_2 = app.randLetters(10) + "@" + app.randLetters(5) + ".com";
+		contact.bday = app.randNumbers(2);
+		contact.bmonth = app.randLetters(3);
+		contact.bday_year = app.randNumbers(4);
+		contact.secondary_address_text = app.randAll(40);
+		contact.secondary_home_phone = app.randPhone();
 
-		app.getContactHelper().fillAddNewAddressForm(gollum);
+		app.getContactHelper().fillAddressForm(contact);
 		app.getNavigationHelper().submitButtonClick();
 		app.getNavigationHelper().returnToHomePage();
 	}
 
-	/**
-	 * Test 2 - creates empty ContactData object, and invokes program to create
-	 * address with given parameters
-	 */
 	@Test
-	public void testEmptyContactCreation() throws Exception {
+	public void emptyContactCreation() throws Exception {
 		app.getNavigationHelper().openMainPage();
 		app.getContactHelper().initContactCreation();
-		app.getContactHelper().fillAddNewAddressForm(new ContactData());
+		app.getContactHelper().fillAddressForm(new ContactData());
 		app.getNavigationHelper().submitButtonClick();
 		app.getNavigationHelper().returnToHomePage();
+	}
+	
+	//@Test
+	public void createNumberOfContacts() throws Exception {
+		int amount = 500;
+		for (int i = 0; i < amount; i++) {
+			notEmptyContactCreation();
+		}
 	}
 }

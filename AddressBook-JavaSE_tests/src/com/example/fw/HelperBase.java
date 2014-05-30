@@ -37,5 +37,12 @@ public abstract class HelperBase {
 	public WebElement findElement(By locator) {
 		return driver.findElement(locator);
 	}
+	
+	public String getFieldText(By locator) {
+		WebElement element = findElement(locator);
+		return element.getAttribute("value");
+	}
+	
+	
 
 }

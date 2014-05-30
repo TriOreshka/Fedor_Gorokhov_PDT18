@@ -8,16 +8,15 @@ public class NavigationHelper extends HelperBase {
 		super(manager);
 	}
 
-	public void returnToHomePage() {
-		click(By.cssSelector("a[href=\"./\"]"));
-	}
-
 	public void openMainPage() {
 		driver.get(manager.baseUrl + "/addressbookv4.1.4/");
 	}
 
+	public void returnToHomePage() {
+		click(By.cssSelector("a[href=\"./\"]"));
+	}
+	
 	public void submitButtonClick() {
 		click(By.name("submit"));
 	}
-
 }
