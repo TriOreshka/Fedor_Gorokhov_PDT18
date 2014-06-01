@@ -26,8 +26,10 @@ public class ContactCreationTests extends TestBase {
 		contact.home_number = app.randPhone();
 		contact.mobile_phone = app.randPhone();
 		contact.work_phone = app.randPhone();
-		contact.email_1 = app.randLetters(10) + "@" + app.randLetters(5) + ".ru";
-		contact.email_2 = app.randLetters(10) + "@" + app.randLetters(5) + ".com";
+		contact.email_1 = app.randLetters(10) + "@" + app.randLetters(5)
+				+ ".ru";
+		contact.email_2 = app.randLetters(10) + "@" + app.randLetters(5)
+				+ ".com";
 		contact.bday = app.randNumbers(2);
 		contact.bmonth = app.randLetters(3);
 		contact.bday_year = app.randNumbers(4);
@@ -47,10 +49,10 @@ public class ContactCreationTests extends TestBase {
 		app.getNavigationHelper().submitButtonClick();
 		app.getNavigationHelper().returnToHomePage();
 	}
-	
-	//@Test
+
+	// @Test
 	public void createNumberOfContacts() throws Exception {
-		int amount = 500;
+		int amount = 5000;
 		for (int i = 0; i < amount; i++) {
 			notEmptyContactCreation();
 		}

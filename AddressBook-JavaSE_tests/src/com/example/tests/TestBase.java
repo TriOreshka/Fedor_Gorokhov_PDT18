@@ -17,7 +17,7 @@ import com.example.fw.ApplicationManager;
 
 public class TestBase {
 
-	static ApplicationManager app; //was public
+	static ApplicationManager app; // was public
 
 	@BeforeSuite
 	public void setUp() throws Exception {
