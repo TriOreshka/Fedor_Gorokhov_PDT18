@@ -21,8 +21,8 @@ public abstract class HelperBase {
 	}
 
 	protected void findAndFill(By locator, String text) {
-		if (text == "" || text == null)
-			return;
+		//if (text == "" || text == null)
+		//	return;
 		WebElement element = findElement(locator);
 		element.clear();
 		element.sendKeys(text);
