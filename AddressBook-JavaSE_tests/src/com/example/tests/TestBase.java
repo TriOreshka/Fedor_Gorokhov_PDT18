@@ -20,10 +20,12 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
 
 import com.example.fw.ApplicationManager;
+import com.example.fw.RandomHelper;
 
 public class TestBase {
 
-	static ApplicationManager app; // was public
+	static ApplicationManager app;
+	static RandomHelper rnd; 
 
 	@BeforeSuite
 	public void setUp() throws Exception {
@@ -56,4 +58,17 @@ public class TestBase {
 			return "test" + rnd.nextInt();
 		}
 	}
+	
+	/*@DataProvider
+	public Iterator<Object[]> randomValidGroupGenerator() {
+		List<Object[]> list = new ArrayList<Object[]>();
+		for (int i = 0; i < 10; i++) {
+			ContactData contact = new ContactData();
+			group.name = generateRandomString();
+			group.header = generateRandomString();
+			group.footer = generateRandomString();
+			list.add(new Object[]{group});
+		}
+		return list.iterator();
+	}*/
 }

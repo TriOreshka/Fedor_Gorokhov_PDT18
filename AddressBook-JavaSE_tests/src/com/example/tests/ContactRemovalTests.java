@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 public class ContactRemovalTests extends TestBase {
 
-	@Test
+	//@Test
 	public void deleteSomeContact() throws Exception {
 		app.getNavigationHelper().openMainPage();
 		app.getContactHelper().startEditContact(5);
@@ -13,9 +13,9 @@ public class ContactRemovalTests extends TestBase {
 		app.getNavigationHelper().openMainPage();
 	}
 
-	//@Test
+	@Test
 	public void deleteNumberOfContacts() throws Exception {
-		int amount = 5000;
+		int amount = 60;
 		for (int i = 0; i < amount; i++) {
 			deleteSomeContact();
 		}

@@ -1,6 +1,11 @@
 package com.example.fw;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
 import com.example.tests.ContactData;
 
 public class ContactHelper extends HelperBase {
@@ -39,24 +44,46 @@ public class ContactHelper extends HelperBase {
 	}
 
 	public ContactData modifyContact (ContactData contact, String modifier) {
-		contact.first_name = modifier + getFieldText(By.name("firstname"));
-		contact.last_name = modifier + getFieldText(By.name("lastname"));
-		contact.address_text = modifier + getFieldText(By.name("address"));
-		contact.home_number = modifier + getFieldText(By.name("home"));
-		contact.mobile_phone = modifier + getFieldText(By.name("mobile"));
-		contact.work_phone = modifier + getFieldText(By.name("work"));
-		contact.email_1 = modifier + getFieldText(By.name("email"));
-		contact.email_2 = modifier + getFieldText(By.name("email2"));
-		contact.bday = getFieldText(By.name("bday"));
-		contact.bmonth = getFieldText(By.name("bmonth"));
-		contact.bday_year = getFieldText(By.name("byear"));
-		contact.secondary_address_text = modifier + getFieldText(By.name("address2"));
-		contact.secondary_home_phone = modifier + getFieldText(By.name("phone2"));
+		contact.first_name = modifier + getAttributeValue(By.name("firstname"));
+		contact.last_name = modifier + getAttributeValue(By.name("lastname"));
+		contact.address_text = modifier + getAttributeValue(By.name("address"));
+		contact.home_number = modifier + getAttributeValue(By.name("home"));
+		contact.mobile_phone = modifier + getAttributeValue(By.name("mobile"));
+		contact.work_phone = modifier + getAttributeValue(By.name("work"));
+		contact.email_1 = modifier + getAttributeValue(By.name("email"));
+		contact.email_2 = modifier + getAttributeValue(By.name("email2"));
+		contact.bday = getAttributeValue(By.name("bday"));
+		contact.bmonth = getAttributeValue(By.name("bmonth"));
+		contact.bday_year = getAttributeValue(By.name("byear"));
+		contact.secondary_address_text = modifier + getAttributeValue(By.name("address2"));
+		contact.secondary_home_phone = modifier + getAttributeValue(By.name("phone2"));
 		return contact;
 	}
 
 	public void updateContact() {
 		click(By.cssSelector("input[value='Update']"));
+	}
+
+	public List<ContactData> getContacts() {
+		List<ContactData> contacts = new ArrayList<ContactData>();
+		List<WebElement> allRows = driver.findElements(By.cssSelector("[name='entry']"));
+		allRows.remove(0);
+		for (WebElement row : allRows) {
+			ContactData contact = new ContactData();
+			contact.first_name = getCellText(row, 2);
+			contact.last_name = row.findElement(By.xpath("td[3]")).getText();
+			contact.email_1 = row.findElement(By.xpath("td[4]")).getText();
+			contact.home_number = row.findElement(By.xpath("td[5]")).getText();
+			contacts.add(contact);
+		} 
+		return contacts;
+	}
+
+	public ContactData workAround4FirstLastNamesMessIssue(ContactData contact) {
+		String temp = contact.last_name;
+		contact.last_name = contact.first_name;
+		contact.first_name = temp;
+		return contact;
 	}
 
 }

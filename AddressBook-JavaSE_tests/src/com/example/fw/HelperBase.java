@@ -38,9 +38,13 @@ public abstract class HelperBase {
 		return driver.findElement(locator);
 	}
 	
-	public String getFieldText(By locator) {
+	public String getAttributeValue(By locator) {
 		WebElement element = findElement(locator);
 		return element.getAttribute("value");
+	}
+
+	protected String getCellText(WebElement row, int cellNum) {
+		return row.findElement(By.xpath("td["+cellNum+"]")).getText();
 	}
 	
 	

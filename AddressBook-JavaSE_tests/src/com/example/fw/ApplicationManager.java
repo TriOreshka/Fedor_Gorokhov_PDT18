@@ -1,6 +1,5 @@
 package com.example.fw;
 
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -16,6 +15,7 @@ public class ApplicationManager {
 	private NavigationHelper navigationHelper;
 	private GroupHelper groupHelper;
 	private ContactHelper contactHelper;
+	static RandomHelper randomHelper;
 	
 	public ApplicationManager() {
 		driver = new FirefoxDriver();
@@ -49,29 +49,10 @@ public class ApplicationManager {
 		return contactHelper;
 	}
 	
-	public String makeRandString(String characters, int length) {
-	    char[] text = new char[length];
-	    Random rng = new Random();
-	    for (int i = 0; i < length; i++)
-	    {
-	        text[i] = characters.charAt(rng.nextInt(characters.length()));
-	    }
-	    return new String(text);
+	static RandomHelper getRandomHelper(){
+		if (randomHelper == null) {
+			randomHelper = new RandomHelper();			
+		}
+		return randomHelper;
 	}
-	
-	public String randLetters(int len) {
-	    return makeRandString("QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm", len);
-	}
-	
-	public String randNumbers(int len) {
-	    return makeRandString("1234567890", len);
-	}
-	
-	public String randAll(int len) {
-	    return makeRandString("QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890,.-(){}_", len);
-	}
-	
-	public String randPhone() {
-	    return ("(" + randNumbers(3) + ")" + randNumbers(3)+ "-" + randNumbers(2)+ "-" + randNumbers(2));
-	}    
 }
