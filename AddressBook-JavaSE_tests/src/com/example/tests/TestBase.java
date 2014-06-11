@@ -1,13 +1,3 @@
-/***
- * TestBase.java
- * 
- * Created on May 19-20, 2014 as home task 1&2 for training 
- * "Programming For Testers" by Software-testing.ru 
- * (http://www.software-testing.ru/events/864-programming-for-testers-new) 
- * 
- * Base test class, contains low-level implementation of all methods,
- * including setUp and tearDown 
- */
 package com.example.tests;
 
 import java.util.ArrayList;
@@ -20,12 +10,11 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
 
 import com.example.fw.ApplicationManager;
-import com.example.fw.RandomHelper;
+import com.example.fw.RND;
 
 public class TestBase {
 
 	static ApplicationManager app;
-	static RandomHelper rnd; 
 
 	@BeforeSuite
 	public void setUp() throws Exception {
@@ -59,16 +48,26 @@ public class TestBase {
 		}
 	}
 	
-	/*@DataProvider
-	public Iterator<Object[]> randomValidGroupGenerator() {
+	@DataProvider
+	public Iterator<Object[]> randomValidContactGenerator() {
 		List<Object[]> list = new ArrayList<Object[]>();
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 15; i++) {
 			ContactData contact = new ContactData();
-			group.name = generateRandomString();
-			group.header = generateRandomString();
-			group.footer = generateRandomString();
-			list.add(new Object[]{group});
+			contact.first_name = RND.randLetters(8);
+			contact.last_name = RND.randLetters(12);
+			contact.address_text = RND.randAll(30);
+			contact.home_number = RND.randPhone();
+			contact.mobile_phone = RND.randPhone();
+			contact.work_phone = RND.randPhone();
+			contact.email_1 = RND.randEmail(".ru");
+			contact.email_2 = RND.randEmail(".com");
+			contact.bday = RND.randNumbers(2);
+			contact.bmonth = RND.randLetters(3);
+			contact.bday_year = RND.randNumbers(4);
+			contact.secondary_address_text = RND.randAll(40);
+			contact.secondary_home_phone = RND.randPhone();
+			list.add(new Object[]{contact});
 		}
 		return list.iterator();
-	}*/
+	}
 }

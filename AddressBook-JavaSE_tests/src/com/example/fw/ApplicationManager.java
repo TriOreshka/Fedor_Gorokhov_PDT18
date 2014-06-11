@@ -15,7 +15,7 @@ public class ApplicationManager {
 	private NavigationHelper navigationHelper;
 	private GroupHelper groupHelper;
 	private ContactHelper contactHelper;
-	static RandomHelper randomHelper;
+	static RND randomHelper;
 	
 	public ApplicationManager() {
 		driver = new FirefoxDriver();
@@ -49,9 +49,9 @@ public class ApplicationManager {
 		return contactHelper;
 	}
 	
-	static RandomHelper getRandomHelper(){
+	static RND getRandomHelper(){
 		if (randomHelper == null) {
-			randomHelper = new RandomHelper();			
+			randomHelper = new RND();			
 		}
 		return randomHelper;
 	}

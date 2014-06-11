@@ -4,9 +4,9 @@ import static org.testng.Assert.assertEquals;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
-
 import org.testng.annotations.Test;
+
+import com.example.fw.RND;
 
 public class CroupRemovalTests extends TestBase {
 
@@ -17,9 +17,7 @@ public class CroupRemovalTests extends TestBase {
 
 		// save old state
 		List<GroupData> oldList = app.getGroupHelper().getGroups();
-		
-		Random rnd = new Random();
-		int index = rnd.nextInt(oldList.size()-1);
+		int index = RND.getRandomInRange(oldList.size()-1);
 		
 		// actions
 		app.getGroupHelper().deleteGroup(index);

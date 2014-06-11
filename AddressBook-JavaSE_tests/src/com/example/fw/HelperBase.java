@@ -1,6 +1,7 @@
 package com.example.fw;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -25,7 +26,8 @@ public abstract class HelperBase {
 		//	return;
 		WebElement element = findElement(locator);
 		element.clear();
-		element.sendKeys(text);
+		setValue (element, text);
+		//element.sendKeys(text);
 	}
 
 	protected void findAndSelect(By locator, String text) {
@@ -47,6 +49,12 @@ public abstract class HelperBase {
 		return row.findElement(By.xpath("td["+cellNum+"]")).getText();
 	}
 	
+	protected String getCellInputValue(WebElement row, int cellNum) {
+		return row.findElement(By.xpath("td["+cellNum+"]/input")).getAttribute("value");
+	}
 	
+	private void setValue(WebElement element, String value) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].value = arguments[1]", element, value);
+    }
 
 }
