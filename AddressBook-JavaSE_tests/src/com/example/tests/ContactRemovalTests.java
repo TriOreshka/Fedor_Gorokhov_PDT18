@@ -15,16 +15,16 @@ public class ContactRemovalTests extends TestBase {
 	public void deleteSomeContact() throws Exception {
 
 		app.getNavigationHelper().openMainPage();
-		
+
 		// save current state
 		List<ContactData> oldList = app.getContactHelper().getContacts();
-		int index = RND.getRandomInRange(oldList.size()-1);
+		int index = RND.getRandomInRange(oldList.size() - 1);
 
 		// do staff
-		app.getContactHelper().startEditContact(index+2);
+		app.getContactHelper().startEditContact(index + 2);
 		app.getContactHelper().deleteContact();
 		app.getNavigationHelper().returnToHomePage();
-		
+
 		// get new state + verification
 		List<ContactData> newList = app.getContactHelper().getContacts();
 		oldList.remove(index);
@@ -32,7 +32,7 @@ public class ContactRemovalTests extends TestBase {
 		assertEquals(newList, oldList);
 	}
 
-	//@Test
+	// @Test
 	public void deleteNumberOfContacts() throws Exception {
 		int amount = 63;
 		for (int i = 0; i < amount; i++) {
@@ -40,8 +40,8 @@ public class ContactRemovalTests extends TestBase {
 		}
 
 	}
-	
-	//@Test
+
+	// @Test
 	public void deleteAllContacts() throws Exception {
 		app.getNavigationHelper().openMainPage();
 		List<ContactData> list = app.getContactHelper().getContacts();

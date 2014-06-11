@@ -25,7 +25,7 @@ public class TestBase {
 	public void tearDown() throws Exception {
 		app.stop();
 	}
-	
+
 	@DataProvider
 	public Iterator<Object[]> randomValidGroupGenerator() {
 		List<Object[]> list = new ArrayList<Object[]>();
@@ -34,11 +34,11 @@ public class TestBase {
 			group.name = generateRandomString();
 			group.header = generateRandomString();
 			group.footer = generateRandomString();
-			list.add(new Object[]{group});
+			list.add(new Object[] { group });
 		}
 		return list.iterator();
 	}
-	
+
 	public String generateRandomString() {
 		Random rnd = new Random();
 		if (rnd.nextInt(5) == 0) {
@@ -47,7 +47,7 @@ public class TestBase {
 			return "test" + rnd.nextInt();
 		}
 	}
-	
+
 	@DataProvider
 	public Iterator<Object[]> randomValidContactGenerator() {
 		List<Object[]> list = new ArrayList<Object[]>();
@@ -66,7 +66,7 @@ public class TestBase {
 			contact.bday_year = RND.randNumbers(4);
 			contact.secondary_address_text = RND.randAll(40);
 			contact.secondary_home_phone = RND.randPhone();
-			list.add(new Object[]{contact});
+			list.add(new Object[] { contact });
 		}
 		return list.iterator();
 	}

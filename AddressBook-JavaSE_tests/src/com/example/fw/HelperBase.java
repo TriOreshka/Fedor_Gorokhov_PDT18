@@ -7,12 +7,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 public abstract class HelperBase {
-	
+
 	protected ApplicationManager manager;
 	protected WebDriver driver;
 	public boolean acceptnextAlert = true;
 
-	public HelperBase(ApplicationManager manager){
+	public HelperBase(ApplicationManager manager) {
 		this.manager = manager;
 		this.driver = manager.driver;
 	}
@@ -22,12 +22,12 @@ public abstract class HelperBase {
 	}
 
 	protected void findAndFill(By locator, String text) {
-		//if (text == "" || text == null)
-		//	return;
+		// if (text == "" || text == null)
+		// return;
 		WebElement element = findElement(locator);
 		element.clear();
-		setValue (element, text);
-		//element.sendKeys(text);
+		setValue(element, text);
+		// element.sendKeys(text);
 	}
 
 	protected void findAndSelect(By locator, String text) {
@@ -39,22 +39,24 @@ public abstract class HelperBase {
 	public WebElement findElement(By locator) {
 		return driver.findElement(locator);
 	}
-	
+
 	public String getAttributeValue(By locator) {
 		WebElement element = findElement(locator);
 		return element.getAttribute("value");
 	}
 
 	protected String getCellText(WebElement row, int cellNum) {
-		return row.findElement(By.xpath("td["+cellNum+"]")).getText();
+		return row.findElement(By.xpath("td[" + cellNum + "]")).getText();
 	}
-	
+
 	protected String getCellInputValue(WebElement row, int cellNum) {
-		return row.findElement(By.xpath("td["+cellNum+"]/input")).getAttribute("value");
+		return row.findElement(By.xpath("td[" + cellNum + "]/input"))
+				.getAttribute("value");
 	}
-	
+
 	private void setValue(WebElement element, String value) {
-        ((JavascriptExecutor) driver).executeScript("arguments[0].value = arguments[1]", element, value);
-    }
+		((JavascriptExecutor) driver).executeScript(
+				"arguments[0].value = arguments[1]", element, value);
+	}
 
 }

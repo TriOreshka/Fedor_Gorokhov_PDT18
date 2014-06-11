@@ -40,24 +40,6 @@ public class ContactHelper extends HelperBase {
 
 	public void deleteContact() {
 		click(By.cssSelector("input[value='Delete']"));
-		
-	}
-
-	public ContactData modifyContact (ContactData contact, String modifier) {
-		contact.first_name = modifier + getAttributeValue(By.name("firstname"));
-		contact.last_name = modifier + getAttributeValue(By.name("lastname"));
-		contact.address_text = modifier + getAttributeValue(By.name("address"));
-		contact.home_number = modifier + getAttributeValue(By.name("home"));
-		contact.mobile_phone = modifier + getAttributeValue(By.name("mobile"));
-		contact.work_phone = modifier + getAttributeValue(By.name("work"));
-		contact.email_1 = modifier + getAttributeValue(By.name("email"));
-		contact.email_2 = modifier + getAttributeValue(By.name("email2"));
-		contact.bday = getAttributeValue(By.name("bday"));
-		contact.bmonth = getAttributeValue(By.name("bmonth"));
-		contact.bday_year = getAttributeValue(By.name("byear"));
-		contact.secondary_address_text = modifier + getAttributeValue(By.name("address2"));
-		contact.secondary_home_phone = modifier + getAttributeValue(By.name("phone2"));
-		return contact;
 	}
 
 	public void updateContact() {
@@ -66,16 +48,17 @@ public class ContactHelper extends HelperBase {
 
 	public List<ContactData> getContacts() {
 		List<ContactData> contacts = new ArrayList<ContactData>();
-		List<WebElement> allRows = driver.findElements(By.cssSelector("[name='entry']"));
+		List<WebElement> allRows = driver.findElements(By
+				.cssSelector("[name='entry']"));
 		for (WebElement row : allRows) {
 			ContactData contact = new ContactData();
 			contact.first_name = getCellText(row, 2);
 			contact.last_name = getCellText(row, 3);
 			contact.email_1 = getCellText(row, 4);
 			contact.home_number = getCellText(row, 5);
-			contact.id = getCellInputValue(row,1);
+			contact.id = getCellInputValue(row, 1);
 			contacts.add(contact);
-		} 
+		}
 		return contacts;
 	}
 
