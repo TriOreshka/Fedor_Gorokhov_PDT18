@@ -1,36 +1,25 @@
 package com.example.tests;
 
-import static org.testng.Assert.assertEquals;
-
-import java.util.Collections;
-import java.util.List;
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.assertThat;
 
 import org.testng.annotations.Test;
 
-import com.example.fw.RND;
+import com.example.fw.RAND;
+import com.example.utils.SortedListOf;
 
 public class CroupRemovalTests extends TestBase {
 
 	@Test
 	public void deleteSomeGroup() throws Exception {
-		app.getNavigationHelper().openMainPage();
-		app.getGroupHelper().gotoGroupsPage();
-
 		// save old state
-		List<GroupData> oldList = app.getGroupHelper().getGroups();
-		int index = RND.getRandomInRange(oldList.size() - 1);
-
+		SortedListOf<GroupData> oldList = app.getGroupHelper().getGroups();
+		int index = RAND.getIntRand(oldList.size() - 1);
 		// actions
 		app.getGroupHelper().deleteGroup(index);
-		app.getGroupHelper().gotoGroupsPage();
-
 		// save new state
-		List<GroupData> newList = app.getGroupHelper().getGroups();
-
+		SortedListOf<GroupData> newList = app.getGroupHelper().getGroups();
 		// compare states
-		oldList.remove(index);
-		Collections.sort(oldList);
-		assertEquals(newList, oldList);
-
+		assertThat(newList, equalTo(oldList.without(index)));
 	}
 }

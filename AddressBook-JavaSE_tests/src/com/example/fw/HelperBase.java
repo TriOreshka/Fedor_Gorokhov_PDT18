@@ -1,5 +1,7 @@
 package com.example.fw;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -21,7 +23,7 @@ public abstract class HelperBase {
 		findElement(locator).click();
 	}
 
-	protected void findAndFill(By locator, String text) {
+	protected void type(By locator, String text) {
 		// if (text == "" || text == null)
 		// return;
 		WebElement element = findElement(locator);
@@ -30,7 +32,7 @@ public abstract class HelperBase {
 		// element.sendKeys(text);
 	}
 
-	protected void findAndSelect(By locator, String text) {
+	protected void select(By locator, String text) {
 		if (text == "" || text == null)
 			return;
 		new Select(findElement(locator)).selectByVisibleText(text);
@@ -40,23 +42,27 @@ public abstract class HelperBase {
 		return driver.findElement(locator);
 	}
 
+	public List<WebElement> findElements(By locator) {
+		return driver.findElements(locator);
+	}
+
 	public String getAttributeValue(By locator) {
 		WebElement element = findElement(locator);
 		return element.getAttribute("value");
 	}
 
-	protected String getCellText(WebElement row, int cellNum) {
+	protected String getText(WebElement row, int cellNum) {
 		return row.findElement(By.xpath("td[" + cellNum + "]")).getText();
 	}
 
-	protected String getCellInputValue(WebElement row, int cellNum) {
+	protected String getCellValue(WebElement row, int cellNum) {
 		return row.findElement(By.xpath("td[" + cellNum + "]/input"))
 				.getAttribute("value");
 	}
 
 	private void setValue(WebElement element, String value) {
-		((JavascriptExecutor) driver).executeScript(
-				"arguments[0].value = arguments[1]", element, value);
+		((JavascriptExecutor) driver)
+		.executeScript("arguments[0].value = arguments[1]", element, value);
 	}
 
 }

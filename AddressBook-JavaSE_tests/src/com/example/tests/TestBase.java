@@ -10,11 +10,13 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
 
 import com.example.fw.ApplicationManager;
-import com.example.fw.RND;
+import com.example.fw.RAND;
 
 public class TestBase {
 
 	static ApplicationManager app;
+
+	// private String name;
 
 	@BeforeSuite
 	public void setUp() throws Exception {
@@ -30,10 +32,9 @@ public class TestBase {
 	public Iterator<Object[]> randomValidGroupGenerator() {
 		List<Object[]> list = new ArrayList<Object[]>();
 		for (int i = 0; i < 10; i++) {
-			GroupData group = new GroupData();
-			group.name = generateRandomString();
-			group.header = generateRandomString();
-			group.footer = generateRandomString();
+			GroupData group = new GroupData().withName(generateRandomString())
+					.withHeader(generateRandomString())
+					.withFooter(generateRandomString());
 			list.add(new Object[] { group });
 		}
 		return list.iterator();
@@ -51,23 +52,26 @@ public class TestBase {
 	@DataProvider
 	public Iterator<Object[]> randomValidContactGenerator() {
 		List<Object[]> list = new ArrayList<Object[]>();
-		for (int i = 0; i < 15; i++) {
-			ContactData contact = new ContactData();
-			contact.first_name = RND.randLetters(8);
-			contact.last_name = RND.randLetters(12);
-			contact.address_text = RND.randAll(30);
-			contact.home_number = RND.randPhone();
-			contact.mobile_phone = RND.randPhone();
-			contact.work_phone = RND.randPhone();
-			contact.email_1 = RND.randEmail(".ru");
-			contact.email_2 = RND.randEmail(".com");
-			contact.bday = RND.randNumbers(2);
-			contact.bmonth = RND.randLetters(3);
-			contact.bday_year = RND.randNumbers(4);
-			contact.secondary_address_text = RND.randAll(40);
-			contact.secondary_home_phone = RND.randPhone();
+		String dateStr = new String();
+		for (int i = 0; i < 10; i++) {
+			dateStr = RAND.doRandDate();
+			ContactData contact = new ContactData()
+					.withFirstName(RAND.randLetters(8))
+					.withLastName(RAND.randLetters(12))
+					.withAddressText(RAND.randAll(30))
+					.withHomeNumber(RAND.randPhone())
+					.withMobilePhone(RAND.randPhone())
+					.withWorkPhone(RAND.randPhone())
+					.withEmail1(RAND.randEmail(".ru"))
+					.withEmail2(RAND.randEmail(".com"))
+					.withBday(dateStr.split(" ")[0])
+					.withBmonth(dateStr.split(" ")[1])
+					.withByear(dateStr.split(" ")[2])
+					.with2ndAddressText(RAND.randAll(40))
+					.with2ndHomePhone(RAND.randPhone());
 			list.add(new Object[] { contact });
 		}
 		return list.iterator();
 	}
+
 }

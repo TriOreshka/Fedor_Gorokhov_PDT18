@@ -1,53 +1,45 @@
 package com.example.tests;
 
-import static org.testng.Assert.assertEquals;
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.assertThat;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.example.fw.RND;
+import com.example.fw.ContactHelper;
+import com.example.fw.RAND;
+import com.example.utils.SortedListOf;
 
 public class ContactRemovalTests extends TestBase {
 
 	@Test
 	public void deleteSomeContact() throws Exception {
-
-		app.getNavigationHelper().openMainPage();
-
+		ContactHelper cHelper = app.getContactHelper();
 		// save current state
-		List<ContactData> oldList = app.getContactHelper().getContacts();
-		int index = RND.getRandomInRange(oldList.size() - 1);
-
+		SortedListOf<ContactData> oldList = cHelper.getContacts();
 		// do staff
-		app.getContactHelper().startEditContact(index + 2);
-		app.getContactHelper().deleteContact();
-		app.getNavigationHelper().returnToHomePage();
-
+		int index = RAND.getIntRand(oldList.size() - 1);
+		cHelper.removeContact(index);
 		// get new state + verification
-		List<ContactData> newList = app.getContactHelper().getContacts();
-		oldList.remove(index);
-		Collections.sort(oldList);
-		assertEquals(newList, oldList);
+		SortedListOf<ContactData> newList = cHelper.getContacts();
+		assertThat(newList, equalTo(oldList.without(index)));
 	}
 
-	// @Test
+	//@Test
 	public void deleteNumberOfContacts() throws Exception {
-		int amount = 63;
+		int amount = 20;
 		for (int i = 0; i < amount; i++) {
 			deleteSomeContact();
 		}
-
 	}
 
-	// @Test
+	//@Test
 	public void deleteAllContacts() throws Exception {
-		app.getNavigationHelper().openMainPage();
+		app.navigateTo().mainPage();
 		List<ContactData> list = app.getContactHelper().getContacts();
 		for (ContactData item : list) {
-			app.getNavigationHelper().invokeDelete(item.id);
+			app.navigateTo().invokeDelete(item.getId());
 		}
-
 	}
 }

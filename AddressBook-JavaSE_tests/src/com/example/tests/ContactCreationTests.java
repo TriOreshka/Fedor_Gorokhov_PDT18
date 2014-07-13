@@ -1,56 +1,44 @@
 package com.example.tests;
 
-import static org.testng.Assert.assertEquals;
-
-import java.util.Collections;
-import java.util.List;
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.assertThat;
 
 import org.testng.annotations.Test;
+
+import com.example.fw.ContactHelper;
+import com.example.utils.SortedListOf;
 
 public class ContactCreationTests extends TestBase {
 
 	@Test(dataProvider = "randomValidContactGenerator")
 	public void testContactCreationWithValidData(ContactData contact)
 			throws Exception {
-		app.getNavigationHelper().openMainPage();
-
+		ContactHelper cHelper = app.getContactHelper();
 		// save current state
-		List<ContactData> oldList = app.getContactHelper().getContacts();
-
+		SortedListOf<ContactData> oldList = cHelper.getContacts();
 		// do staff
-		app.getContactHelper().initContactCreation();
-		app.getContactHelper().fillAddressForm(contact);
-		app.getNavigationHelper().submitButtonClick();
-		app.getNavigationHelper().returnToHomePage();
-
+		app.getContactHelper().createContact(contact);
 		// get new state + verification
-		List<ContactData> newList = app.getContactHelper().getContacts();
-		app.getContactHelper().workAround4FirstLastNamesMessIssue(contact);
-		oldList.add(contact);
-		Collections.sort(oldList);
-		assertEquals(newList, oldList);
+		SortedListOf<ContactData> newList = cHelper.getContacts();
+		assertThat(newList,	equalTo(oldList
+				.withAdded(cHelper
+						.workAround(contact))));
 	}
 
 	// @Test(dataProvider = "randomValidContactGenerator")
 	public void testFastContactCreation(ContactData contact) throws Exception {
-		app.getNavigationHelper().openMainPage();
-		app.getContactHelper().initContactCreation();
-		app.getContactHelper().fillAddressForm(contact);
-		app.getNavigationHelper().submitButtonClick();
+		app.getContactHelper().fastCreateContact(contact);
 	}
 
 	// @Test
 	public void emptyContactCreation() throws Exception {
-		app.getNavigationHelper().openMainPage();
-		app.getContactHelper().initContactCreation();
-		app.getContactHelper().fillAddressForm(new ContactData());
-		app.getNavigationHelper().submitButtonClick();
-		app.getNavigationHelper().returnToHomePage();
+		testFastContactCreation(new ContactData());
+		// app.getContactHelper().createContact(new ContactData());
 	}
 
 	// @Test
 	public void createNumberOfContacts() throws Exception {
-		int amount = 50;
+		int amount = 100;
 		for (int i = 0; i < amount; i++) {
 			emptyContactCreation();
 		}
