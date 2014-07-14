@@ -28,11 +28,15 @@ public class ContactHelper extends HelperBase {
 	}
 
 	private void rebuildCache() {
+		System.out.println("Rebuild cache started");
 		cachedContacts = new SortedListOf<ContactData>();
 		manager.navigateTo().mainPage();
 		List<WebElement> allRows = findElements(By
 				.cssSelector("[name='entry']"));
+		int i = 1;
 		for (WebElement row : allRows) {
+			if ((i % 10) == 0) System.out.print(i + ",");
+			if ((i++ % 250) == 0)  System.out.println();
 			ContactData contact = new ContactData()
 				.withFirstName(getText(row, 2))
 				.withLastName(getText(row, 3))
