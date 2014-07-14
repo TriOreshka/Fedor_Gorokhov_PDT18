@@ -8,18 +8,17 @@ import java.util.List;
 import org.testng.annotations.Test;
 
 import com.example.fw.ContactHelper;
-import com.example.fw.RAND;
 import com.example.utils.SortedListOf;
 
 public class ContactRemovalTests extends TestBase {
 
-	@Test
+	// @Test
 	public void deleteSomeContact() throws Exception {
 		ContactHelper cHelper = app.getContactHelper();
 		// save current state
 		SortedListOf<ContactData> oldList = cHelper.getContacts();
 		// do staff
-		int index = RAND.getIntRand(oldList.size() - 1);
+		int index = getRandContactIndex(oldList);
 		cHelper.removeContact(index);
 		// get new state + verification
 		SortedListOf<ContactData> newList = cHelper.getContacts();
@@ -28,16 +27,16 @@ public class ContactRemovalTests extends TestBase {
 
 	//@Test
 	public void deleteNumberOfContacts() throws Exception {
-		int amount = 20;
+		int amount = 6;
 		for (int i = 0; i < amount; i++) {
 			deleteSomeContact();
 		}
 	}
 
-	//@Test
+	@Test
 	public void deleteAllContacts() throws Exception {
 		app.navigateTo().mainPage();
-		List<ContactData> list = app.getContactHelper().getContacts();
+		List<ContactData> list = app.getContactHelper().getIDs();
 		for (ContactData item : list) {
 			app.navigateTo().invokeDelete(item.getId());
 		}

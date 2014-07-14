@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.example.tests.ContactData;
+import com.example.utils.ListOf;
 import com.example.utils.SortedListOf;
 
 public class ContactHelper extends HelperBase {
@@ -33,15 +34,28 @@ public class ContactHelper extends HelperBase {
 				.cssSelector("[name='entry']"));
 		for (WebElement row : allRows) {
 			ContactData contact = new ContactData()
-					.withFirstName(getText(row, 2))
-					.withLastName(getText(row, 3))
-					.withEmail1(getText(row, 4))
-					.withHomeNumber(getText(row, 5))
-					.withID(getCellValue(row, 1));
+				.withFirstName(getText(row, 2))
+				.withLastName(getText(row, 3))
+				/*.withEmail1(getText(row, 4))
+				.withHomeNumber(getText(row, 5))
+				.withID(getCellValue(row, 1))*/;
 			cachedContacts.add(contact);
 		}
 	}
 
+	public List<ContactData> getIDs() {
+		List<ContactData> contactIDs = new ListOf<ContactData>();
+		manager.navigateTo().mainPage();
+		List<WebElement> allRows = findElements(By
+				.cssSelector("[name='entry']"));
+		for (WebElement row : allRows) {
+			ContactData contact = new ContactData()
+				.withID(getCellValue(row, 1));
+			contactIDs.add(contact);
+		}
+		return contactIDs;
+	}
+	
 	public ContactHelper createContact(ContactData contact) {
 		manager.navigateTo().mainPage();
 		initContactCreation();
@@ -82,6 +96,15 @@ public class ContactHelper extends HelperBase {
 		return contact.withLastName(contact.getFirst_name())
 				.withFirstName(temp);
 	}
+	
+	public void printRows() {
+		manager.navigateTo().mainPage();
+		List<WebElement> allRows = findElements(By
+				.cssSelector("[name='entry']"));
+		for (WebElement row : allRows) {
+			System.out.println(row.getText());
+		}
+	}
 
 	// --------------------------------------------------------------------------------
 	public ContactHelper fillContactForm(ContactData contact, boolean fromType) {
@@ -99,7 +122,7 @@ public class ContactHelper extends HelperBase {
 		if (fromType == CREATION) {
 			// findAndSelect(By.name("new_group"), "group 1");
 		} else {
-			if (findElements(By.name("new_group")).size() != 0) {
+			if (countElements(By.name("new_group")) != 0) {
 				throw new Error(
 						"Group selector exists in contact modification form");
 			}
@@ -115,7 +138,7 @@ public class ContactHelper extends HelperBase {
 	}
 
 	public ContactHelper startEditContact(int i) {
-		click(By.xpath("//*[@id=\"maintable\"]/tbody/tr[" + i + "]/td[7]/a"));
+		click(By.xpath("//*[@id=\"maintable\"]//tr[" + i + "]/td[7]/a"));
 		return this;
 	}
 

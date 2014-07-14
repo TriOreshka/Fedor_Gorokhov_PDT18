@@ -1,9 +1,10 @@
 package com.example.tests;
 
+import static com.example.tests.GroupDataGenerator.generateRandomGroups;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -11,6 +12,7 @@ import org.testng.annotations.DataProvider;
 
 import com.example.fw.ApplicationManager;
 import com.example.fw.RAND;
+import com.example.utils.SortedListOf;
 
 public class TestBase {
 
@@ -30,23 +32,15 @@ public class TestBase {
 
 	@DataProvider
 	public Iterator<Object[]> randomValidGroupGenerator() {
-		List<Object[]> list = new ArrayList<Object[]>();
-		for (int i = 0; i < 10; i++) {
-			GroupData group = new GroupData().withName(generateRandomString())
-					.withHeader(generateRandomString())
-					.withFooter(generateRandomString());
-			list.add(new Object[] { group });
-		}
-		return list.iterator();
+		return wrapGroupsForDataProvider(generateRandomGroups(10)).iterator();
 	}
 
-	public String generateRandomString() {
-		Random rnd = new Random();
-		if (rnd.nextInt(5) == 0) {
-			return "";
-		} else {
-			return "test" + rnd.nextInt();
+	public static List<Object[]> wrapGroupsForDataProvider(List<GroupData> groups) {
+		List<Object[]> list = new ArrayList<Object[]>();
+		for (GroupData group : groups) {
+			list.add(new Object[]{group});
 		}
+		return list;
 	}
 
 	@DataProvider
@@ -72,6 +66,14 @@ public class TestBase {
 			list.add(new Object[] { contact });
 		}
 		return list.iterator();
+	}
+
+	protected int getRandContactIndex(SortedListOf<ContactData> list) {
+		return RAND.getIntRand(list.size() - 1);
+	}
+
+	protected int getRandGroupIndex(SortedListOf<GroupData> list) {
+		return RAND.getIntRand(list.size() - 1);
 	}
 
 }

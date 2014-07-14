@@ -10,7 +10,7 @@ import com.example.utils.SortedListOf;
 
 public class ContactCreationTests extends TestBase {
 
-	@Test(dataProvider = "randomValidContactGenerator")
+	// @Test(dataProvider = "randomValidContactGenerator")
 	public void testContactCreationWithValidData(ContactData contact)
 			throws Exception {
 		ContactHelper cHelper = app.getContactHelper();
@@ -20,12 +20,11 @@ public class ContactCreationTests extends TestBase {
 		app.getContactHelper().createContact(contact);
 		// get new state + verification
 		SortedListOf<ContactData> newList = cHelper.getContacts();
-		assertThat(newList,	equalTo(oldList
-				.withAdded(cHelper
-						.workAround(contact))));
+		assertThat(newList,
+				equalTo(oldList.withAdded(cHelper.workAround(contact))));
 	}
 
-	// @Test(dataProvider = "randomValidContactGenerator")
+	@Test(dataProvider = "randomValidContactGenerator")
 	public void testFastContactCreation(ContactData contact) throws Exception {
 		app.getContactHelper().fastCreateContact(contact);
 	}
@@ -38,7 +37,7 @@ public class ContactCreationTests extends TestBase {
 
 	// @Test
 	public void createNumberOfContacts() throws Exception {
-		int amount = 100;
+		int amount = 1000;
 		for (int i = 0; i < amount; i++) {
 			emptyContactCreation();
 		}

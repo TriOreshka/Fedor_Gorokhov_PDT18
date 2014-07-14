@@ -15,7 +15,7 @@ public class NavigationHelper extends HelperBase {
 	}
 
 	private boolean onMainPage() {
-		return (driver.findElements(By.id("maintable")).size() > 0);
+		return (countElements(By.id("maintable")) > 0);
 	}
 
 	public void editPage() {
@@ -25,7 +25,7 @@ public class NavigationHelper extends HelperBase {
 	}
 
 	private boolean onEditPage() {
-		return driver.getCurrentUrl().contains("/edit.php");
+		return getCurrentUrl().contains("/edit.php");
 	}
 
 	public void groupsPage() {
@@ -35,8 +35,8 @@ public class NavigationHelper extends HelperBase {
 	}
 
 	private boolean onGroupsPage() {
-		if (driver.getCurrentUrl().contains("/groups.php")
-				&& driver.findElements(By.name("new")).size() > 0) {
+		if (getCurrentUrl().contains("/groups.php")
+				&& countElements(By.name("new")) > 0) {
 			return true;
 		} else {
 			return false;
@@ -44,7 +44,7 @@ public class NavigationHelper extends HelperBase {
 	}
 
 	public void invokeDelete(String id) {
-		driver.get("http://localhost/addressbookv4.1.4/delete.php?id=" + id
+		gotoUrl("http://localhost/addressbookv4.1.4/delete.php?id=" + id
 				+ "&update=Delete");
 	}
 

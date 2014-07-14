@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.Random;
 
 public class RAND {
+	
+	//private Random rndd;
 
 	static String doRandStr(String characters, int length) {
 		Random rndd = new Random();
@@ -25,7 +27,7 @@ public class RAND {
 		Integer dayStr = new Integer(strDate.split("\\.")[0]);
 		String monthStr = " " + monthNames.split("\\;")[month - 1] + " ";
 		String yearStr = (strDate.split("\\.")[2]).split(" ")[0];
-		//System.out.println(dayStr + monthStr + yearStr);
+		// System.out.println(dayStr + monthStr + yearStr);
 		return (dayStr + monthStr + yearStr);
 	}
 
@@ -34,7 +36,8 @@ public class RAND {
 		if (rndd.nextInt(5) == 0) {
 			return "";
 		} else {
-			return doRandStr("QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm", len);
+			return doRandStr(
+					"QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm", len);
 		}
 	}
 
@@ -56,7 +59,9 @@ public class RAND {
 		if (rndd.nextInt(5) == 0) {
 			return "";
 		} else {
-			return doRandStr("QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890,.-(){}_", len);
+			return doRandStr(
+					"QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890,.-(){}_",
+					len);
 		}
 	}
 

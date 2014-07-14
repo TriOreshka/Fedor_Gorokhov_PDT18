@@ -39,7 +39,8 @@ public class GroupHelper extends HelperBase {
 		List<WebElement> checkboxes = findElements(By.name("selected[]"));
 		for (WebElement checkbox : checkboxes) {
 			String title = checkbox.getAttribute("title");
-			String name = title.substring("Select (".length(), title.length() - ")".length());
+			String name = title.substring("Select (".length(), title.length()
+					- ")".length());
 			cachedGroups.add(new GroupData().withName(name));
 		}
 	}

@@ -5,7 +5,6 @@ import static org.junit.Assert.assertThat;
 
 import org.testng.annotations.Test;
 
-import com.example.fw.RAND;
 import com.example.utils.SortedListOf;
 
 public class GroupModificationTests extends TestBase {
@@ -14,7 +13,7 @@ public class GroupModificationTests extends TestBase {
 	public void modifySomeGroup(GroupData group) throws Exception {
 		// save old state
 		SortedListOf<GroupData> oldList = app.getGroupHelper().getGroups();
-		int index = RAND.getIntRand(oldList.size() - 1);
+		int index = getRandGroupIndex(oldList);
 		// actions
 		app.getGroupHelper().modifyGroup(index, group);
 		// save new state & compare states
