@@ -1,1 +1,0 @@
-java -cp bin;C:\Programming4Testers\Soft\Xstream\xstream-1.4.7\lib\xstream-1.4.7.jar;C:\Programming4Testers\Soft\Xstream\xstream-1.4.7\lib\xstream\xpp3_min-1.1.4c.jar com.example.tests.GroupDataGenerator 10 groups.xml xml

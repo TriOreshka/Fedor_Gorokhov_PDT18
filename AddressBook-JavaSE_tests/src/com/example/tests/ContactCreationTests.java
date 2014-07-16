@@ -9,22 +9,23 @@ import com.example.fw.ContactHelper;
 import com.example.utils.SortedListOf;
 
 public class ContactCreationTests extends TestBase {
-
-	// @Test(dataProvider = "randomValidContactGenerator")
+	
+	
+	@Test(dataProvider = "contactsMegaProvider")
 	public void testContactCreationWithValidData(ContactData contact)
 			throws Exception {
 		ContactHelper cHelper = app.getContactHelper();
 		// save current state
 		SortedListOf<ContactData> oldList = cHelper.getContacts();
 		// do staff
-		app.getContactHelper().createContact(contact);
+		cHelper.createContact(contact);
 		// get new state + verification
 		SortedListOf<ContactData> newList = cHelper.getContacts();
 		assertThat(newList,
 				equalTo(oldList.withAdded(cHelper.workAround(contact))));
 	}
 
-	@Test(dataProvider = "randomValidContactGenerator")
+	@Test(dataProvider = "contactsMegaProvider")
 	public void testFastContactCreation(ContactData contact) throws Exception {
 		app.getContactHelper().fastCreateContact(contact);
 	}

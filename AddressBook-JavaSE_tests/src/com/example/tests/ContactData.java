@@ -1,5 +1,7 @@
 package com.example.tests;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class ContactData implements Comparable<ContactData> {
 	private String first_name;
 	private String last_name;
@@ -23,6 +25,13 @@ public class ContactData implements Comparable<ContactData> {
 	public String toString() {
 		return "ContactData [first_name=" + first_name + ", last_name="
 				+ last_name + "]";
+	}
+
+	public String toSemicSV() {
+		return StringUtils.join(new String[] { first_name, last_name,
+				address_text, home_number, mobile_phone, work_phone, email_1,
+				email_2, bday, bmonth, bday_year, secondary_address_text,
+				secondary_home_phone, "!\n" }, ";");
 	}
 
 	@Override

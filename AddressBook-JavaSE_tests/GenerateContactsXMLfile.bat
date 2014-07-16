@@ -1,0 +1,2 @@
+DEL /p contacts.xml.data
+java -cp bin;C:\Programming4Testers\Soft\Xstream\xstream-1.4.7\lib\xstream-1.4.7.jar;C:\Programming4Testers\Soft\Xstream\xstream-1.4.7\lib\xstream\xpp3_min-1.1.4c.jar;C:\Programming4Testers\PDT18_Code\commons-lang3-3.3.2.jar com.example.tests.ContactDataGenerator %1 contacts.xml.data xml

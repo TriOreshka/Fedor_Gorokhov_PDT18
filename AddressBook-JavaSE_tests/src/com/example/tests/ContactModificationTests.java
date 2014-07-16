@@ -10,25 +10,29 @@ import com.example.utils.SortedListOf;
 
 public class ContactModificationTests extends TestBase {
 
-	@Test(dataProvider = "randomValidContactGenerator")
+	//@BeforeTest
+	private void echoBefore() throws Exception{
+		printContacts();
+	}
+	
+	//@AfterTest
+	private void echoAfter() throws Exception{
+		printContacts();
+	}
+		
+	@Test(dataProvider = "contactsMegaProvider")
 	public void modifySomeContact(ContactData contact) throws Exception {
 		ContactHelper cHelper = app.getContactHelper();
 		// save current state
 		SortedListOf<ContactData> oldList = cHelper.getContacts();
 		// do staff
 		int index = getRandContactIndex(oldList);
-		app.getContactHelper().modifyContact(index, contact);
+		cHelper.modifyContact(index, contact);
 		// get new state + verification
 		SortedListOf<ContactData> newList = cHelper.getContacts();
-		assertThat(
-				newList,
-				equalTo(oldList.without(index).withAdded(
-						cHelper.workAround(contact))));
+		assertThat(newList, equalTo(oldList
+									.without(index)
+									.withAdded(cHelper.workAround(contact))));
 	}
-	
-	//@Test
-	public void printContact() throws Exception {
-		app.getContactHelper().printRows();
-	}	
-	
+
 }

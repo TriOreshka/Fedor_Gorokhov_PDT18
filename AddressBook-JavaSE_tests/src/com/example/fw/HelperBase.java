@@ -63,13 +63,16 @@ public abstract class HelperBase {
 	}
 
 	protected String getText(WebElement row, int cellNum) {
-		//return row.findElement(By.xpath("td[" + cellNum + "]")).getText();
-		return row.findElement(By.cssSelector("td:nth-child(" + cellNum + ")")).getText();
+		// return row.findElement(By.xpath("td[" + cellNum + "]")).getText();
+		return row.findElement(By.cssSelector("td:nth-child(" + cellNum + ")"))
+				.getText();
 	}
 
 	protected String getCellValue(WebElement row, int cellNum) {
-		return row.findElement(By.xpath("td[" + cellNum + "]/input")).getAttribute("value");
-		//return row.findElement(By.cssSelector("td:nth-child(" + cellNum + ")")).getAttribute("value");
+		return row.findElement(By.xpath("td[" + cellNum + "]/input"))
+				.getAttribute("value");
+		// return row.findElement(By.cssSelector("td:nth-child(" + cellNum +
+		// ")")).getAttribute("value");
 	}
 
 	private void setValue(WebElement element, String value) {

@@ -1,5 +1,8 @@
 package com.example.fw;
 
+import static com.example.tests.TestBase.printOut;
+import static com.example.tests.TestBase.printlnOut;
+
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -28,38 +31,47 @@ public class ContactHelper extends HelperBase {
 	}
 
 	private void rebuildCache() {
-		System.out.println("Rebuild cache started");
+		printOut("Rebuild Contacts cache started. Processed:");
 		cachedContacts = new SortedListOf<ContactData>();
+		manager.navigateTo().mainPage();
+		List<WebElement> allRows = findElements(By.cssSelector("[name='entry']"));
+		int i = 1;
+		for (WebElement row : allRows) {
+			if ((i++ % 10) == 0) {
+				printOut(i-1 + ",");
+				if ((i % 250) == 0) printlnOut("");
+			}			
+			ContactData contact = new ContactData()
+				.withFirstName(getText(row, 2))
+				.withLastName(getText(row, 3))
+			/*
+			 * .withEmail1(getText(row, 4))
+			 * .withHomeNumber(getText(row, 5))
+			 * .withID(getCellValue(row, 1))
+			 */;
+			cachedContacts.add(contact);
+		}
+		printlnOut("");
+	}
+
+	public List<ContactData> getIDs() {
+		printlnOut("Reading of IDs started. Processed:");
+		List<ContactData> contactIDs = new ListOf<ContactData>();
 		manager.navigateTo().mainPage();
 		List<WebElement> allRows = findElements(By
 				.cssSelector("[name='entry']"));
 		int i = 1;
 		for (WebElement row : allRows) {
-			if ((i % 10) == 0) System.out.print(i + ",");
-			if ((i++ % 250) == 0)  System.out.println();
-			ContactData contact = new ContactData()
-				.withFirstName(getText(row, 2))
-				.withLastName(getText(row, 3))
-				/*.withEmail1(getText(row, 4))
-				.withHomeNumber(getText(row, 5))
-				.withID(getCellValue(row, 1))*/;
-			cachedContacts.add(contact);
-		}
-	}
-
-	public List<ContactData> getIDs() {
-		List<ContactData> contactIDs = new ListOf<ContactData>();
-		manager.navigateTo().mainPage();
-		List<WebElement> allRows = findElements(By
-				.cssSelector("[name='entry']"));
-		for (WebElement row : allRows) {
-			ContactData contact = new ContactData()
-				.withID(getCellValue(row, 1));
+			if ((i++ % 10) == 0) {
+				printOut(i-1 + ",");
+				if ((i % 250) == 0) printlnOut("");
+			}
+			ContactData contact = new ContactData().withID(getCellValue(row, 1));
 			contactIDs.add(contact);
 		}
 		return contactIDs;
 	}
-	
+
 	public ContactHelper createContact(ContactData contact) {
 		manager.navigateTo().mainPage();
 		initContactCreation();
@@ -100,14 +112,23 @@ public class ContactHelper extends HelperBase {
 		return contact.withLastName(contact.getFirst_name())
 				.withFirstName(temp);
 	}
-	
+
 	public void printRows() {
 		manager.navigateTo().mainPage();
-		List<WebElement> allRows = findElements(By
-				.cssSelector("[name='entry']"));
-		for (WebElement row : allRows) {
-			System.out.println(row.getText());
+		List<WebElement> allRows = findElements(By.cssSelector("[name='entry']"));
+		int count = allRows.size();
+		if (count > 20) {
+			printOut("Too many Contacts (" + count + "), ");
+			count = Math.round(count / 20);
+			printlnOut("will echo 1st of " + count+ " contacts");
+			int i = 0;
+			for (WebElement row : allRows){
+				if (i++ % count == 0) printlnOut(row.getText());
+			}
+		} else {
+			for (WebElement row : allRows) printlnOut(row.getText());
 		}
+		
 	}
 
 	// --------------------------------------------------------------------------------

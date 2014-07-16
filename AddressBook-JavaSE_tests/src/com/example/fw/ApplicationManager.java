@@ -8,8 +8,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
-// import org.openqa.selenium.ie.InternetExplorerDriver;
-
 public class ApplicationManager {
 
 	public WebDriver driver;
@@ -18,21 +16,23 @@ public class ApplicationManager {
 	private NavigationHelper navigationHelper;
 	private GroupHelper groupHelper;
 	private ContactHelper contactHelper;
-	private Properties properties;
+	public Properties properties;
 
 	public ApplicationManager(Properties properties) {
 		this.properties = properties;
 		String browser = properties.getProperty("browser");
 		if ("firefox".equals(browser)) {
 			driver = new FirefoxDriver();
-		} else if ("ie".equals(browser)){
+		} else if ("ie".equals(browser)) {
 			driver = new InternetExplorerDriver();
-		} else if ("chrome".equals(browser)){
+			//driver.get("http://127.0.0.1");
+		} else if ("chrome".equals(browser)) {
 			driver = new ChromeDriver();
 		} else {
-			throw new Error ("Unsupported browser: " + browser);
+			throw new Error("Unsupported browser: " + browser);
 		}
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(Long.valueOf(
+				properties.getProperty("waitTimeout", "10")), TimeUnit.SECONDS);
 		driver.get(properties.getProperty("baseUrl"));
 	}
 
@@ -41,23 +41,17 @@ public class ApplicationManager {
 	}
 
 	public NavigationHelper navigateTo() {
-		if (navigationHelper == null) {
-			navigationHelper = new NavigationHelper(this);
-		}
+		if (navigationHelper == null) navigationHelper = new NavigationHelper(this);
 		return navigationHelper;
 	}
 
 	public GroupHelper getGroupHelper() {
-		if (groupHelper == null) {
-			groupHelper = new GroupHelper(this);
-		}
+		if (groupHelper == null) groupHelper = new GroupHelper(this);
 		return groupHelper;
 	}
 
 	public ContactHelper getContactHelper() {
-		if (contactHelper == null) {
-			contactHelper = new ContactHelper(this);
-		}
+		if (contactHelper == null) contactHelper = new ContactHelper(this);
 		return contactHelper;
 	}
 }

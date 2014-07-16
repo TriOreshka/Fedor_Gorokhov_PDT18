@@ -25,7 +25,7 @@ public class ContactRemovalTests extends TestBase {
 		assertThat(newList, equalTo(oldList.without(index)));
 	}
 
-	//@Test
+	// @Test
 	public void deleteNumberOfContacts() throws Exception {
 		int amount = 6;
 		for (int i = 0; i < amount; i++) {

@@ -1,0 +1,170 @@
+1) Output in console for command: <start RunInChrome.bat "!CreateContacts.xml">
+
+C:\Programming4Testers\PDT18_Code\Fedor_Gorokhov_PDT18\AddressBook-JavaSE_tests>
+java -cp bin;C:\Programming4Testers\Soft\Xstream\xstream-1.4.7\lib\xstream-1.4.7
+.jar;C:\Programming4Testers\Soft\Xstream\xstream-1.4.7\lib\xstream\xpp3_min-1.1.
+4c.jar;C:\Programming4Testers\Soft\Xstream\xstream-1.4.7\lib\xstream\xmlpull-1.1
+.3.1.jar;C:\selenium-server-standalone-2.41.0.jar -DconfigFile=chrome.properties
+ org.testng.TestNG "!CreateContacts.xml"
+Picked up JAVA_TOOL_OPTIONS: -agentlib:jvmhook
+Picked up _JAVA_OPTIONS: -Xrunjvmhook -Xbootclasspath/a:C:\PROGRA~2\HP\QUICKT~1\
+bin\JAVA_S~1\classes;C:\PROGRA~2\HP\QUICKT~1\bin\JAVA_S~1\classes\jasmine.jar
+[TestNG] Running:
+  C:\Programming4Testers\PDT18_Code\Fedor_Gorokhov_PDT18\AddressBook-JavaSE_test
+s\!CreateContacts.xml
+
+Starting ChromeDriver (v2.10.267521) on port 31298
+Only local connections are allowed.
+Rebuild Contacts cache started. Processed:
+Rebuild Contacts cache started. Processed:
+Rebuild Contacts cache started. Processed:
+Rebuild Contacts cache started. Processed:
+Rebuild Contacts cache started. Processed:
+Rebuild Contacts cache started. Processed:
+Rebuild Contacts cache started. Processed:
+Rebuild Contacts cache started. Processed:
+Rebuild Contacts cache started. Processed:
+Rebuild Contacts cache started. Processed:
+Rebuild Contacts cache started. Processed:10,
+PASSED: testContactCreationWithValidData(ContactData [first_name=DSUXEhhRTNxX, l
+ast_name=])
+PASSED: testContactCreationWithValidData(ContactData [first_name=fzQnoFqyoOPs, l
+ast_name=])
+PASSED: testContactCreationWithValidData(ContactData [first_name=pkcOIbgstMwJ, l
+ast_name=NTZzuCXH])
+PASSED: testContactCreationWithValidData(ContactData [first_name=IQDewXZKVQtD, l
+ast_name=oqScaCGd])
+PASSED: testContactCreationWithValidData(ContactData [first_name=EyDpFUaZZiUt, l
+ast_name=])
+PASSED: testContactCreationWithValidData(ContactData [first_name=dLMJcOPksbvm, l
+ast_name=nKnMxGho])
+PASSED: testContactCreationWithValidData(ContactData [first_name=, last_name=fwx
+HqSTZ])
+PASSED: testContactCreationWithValidData(ContactData [first_name=, last_name=JrT
+hCict])
+PASSED: testContactCreationWithValidData(ContactData [first_name=, last_name=Lvg
+hTNBZ])
+PASSED: testContactCreationWithValidData(ContactData [first_name=YozFxecWOLNx, l
+ast_name=])
+PASSED: testFastContactCreation(ContactData [first_name=UFKkAWhl, last_name=amAZ
+ofBNblKG])
+PASSED: testFastContactCreation(ContactData [first_name=tpUgZmdC, last_name=Weav
+rGEMunHJ])
+PASSED: testFastContactCreation(ContactData [first_name=AalhBdIX, last_name=])
+PASSED: testFastContactCreation(ContactData [first_name=mOlmMhry, last_name=])
+PASSED: testFastContactCreation(ContactData [first_name=KbvNLXiV, last_name=OldO
+JzVfdCEN])
+PASSED: testFastContactCreation(ContactData [first_name=vDkhywvs, last_name=tCuZ
+ShTTTGWz])
+PASSED: testFastContactCreation(ContactData [first_name=, last_name=])
+PASSED: testFastContactCreation(ContactData [first_name=OWyuDacf, last_name=QNNu
+eMraZmWu])
+PASSED: testFastContactCreation(ContactData [first_name=ZQPBrSZt, last_name=astz
+lWjoURXk])
+PASSED: testFastContactCreation(ContactData [first_name=wwlBrPWo, last_name=mbDU
+BEWYmjop])
+
+===============================================
+    Default test
+    Tests run: 20, Failures: 0, Skips: 0
+===============================================
+
+
+===============================================
+Default suite
+Total tests run: 20, Failures: 0, Skips: 0
+===============================================
+
+[TestNG] Time taken by org.testng.reporters.JUnitReportReporter@1deb45f: 6 ms
+[TestNG] Time taken by org.testng.reporters.SuiteHTMLReporter@b4adb7: 167 ms
+[TestNG] Time taken by org.testng.reporters.XMLReporter@27ca12: 11 ms
+[TestNG] Time taken by org.testng.reporters.EmailableReporter2@183bd71: 7 ms
+[TestNG] Time taken by org.testng.reporters.jq.Main@1b6c909: 32 ms
+[TestNG] Time taken by [FailedReporter passed=0 failed=0 skipped=0]: 1 ms
+
+C:\Programming4Testers\PDT18_Code\Fedor_Gorokhov_PDT18\AddressBook-JavaSE_tests>
+
+******************************************************************************************************
+2) Output in console for command: <start RunInFireFox.bat "!CreateContacts.xml">:
+
+C:\Programming4Testers\PDT18_Code\Fedor_Gorokhov_PDT18\AddressBook-JavaSE_tests>
+java -cp bin;C:\Programming4Testers\Soft\Xstream\xstream-1.4.7\lib\xstream-1.4.7
+.jar;C:\Programming4Testers\Soft\Xstream\xstream-1.4.7\lib\xstream\xpp3_min-1.1.
+4c.jar;C:\Programming4Testers\Soft\Xstream\xstream-1.4.7\lib\xstream\xmlpull-1.1
+.3.1.jar;C:\selenium-server-standalone-2.41.0.jar -DconfigFile=firefox.propertie
+s org.testng.TestNG "!CreateContacts.xml"
+Picked up JAVA_TOOL_OPTIONS: -agentlib:jvmhook
+Picked up _JAVA_OPTIONS: -Xrunjvmhook -Xbootclasspath/a:C:\PROGRA~2\HP\QUICKT~1\
+bin\JAVA_S~1\classes;C:\PROGRA~2\HP\QUICKT~1\bin\JAVA_S~1\classes\jasmine.jar
+[TestNG] Running:
+  C:\Programming4Testers\PDT18_Code\Fedor_Gorokhov_PDT18\AddressBook-JavaSE_test
+s\!CreateContacts.xml
+
+Rebuild Contacts cache started. Processed:10,20,
+Rebuild Contacts cache started. Processed:10,20,
+Rebuild Contacts cache started. Processed:10,20,
+Rebuild Contacts cache started. Processed:10,20,
+Rebuild Contacts cache started. Processed:10,20,
+Rebuild Contacts cache started. Processed:10,20,
+Rebuild Contacts cache started. Processed:10,20,
+Rebuild Contacts cache started. Processed:10,20,
+Rebuild Contacts cache started. Processed:10,20,
+Rebuild Contacts cache started. Processed:10,20,
+Rebuild Contacts cache started. Processed:10,20,30,
+PASSED: testContactCreationWithValidData(ContactData [first_name=DSUXEhhRTNxX, l
+ast_name=])
+PASSED: testContactCreationWithValidData(ContactData [first_name=fzQnoFqyoOPs, l
+ast_name=])
+PASSED: testContactCreationWithValidData(ContactData [first_name=pkcOIbgstMwJ, l
+ast_name=NTZzuCXH])
+PASSED: testContactCreationWithValidData(ContactData [first_name=IQDewXZKVQtD, l
+ast_name=oqScaCGd])
+PASSED: testContactCreationWithValidData(ContactData [first_name=EyDpFUaZZiUt, l
+ast_name=])
+PASSED: testContactCreationWithValidData(ContactData [first_name=dLMJcOPksbvm, l
+ast_name=nKnMxGho])
+PASSED: testContactCreationWithValidData(ContactData [first_name=, last_name=fwx
+HqSTZ])
+PASSED: testContactCreationWithValidData(ContactData [first_name=, last_name=JrT
+hCict])
+PASSED: testContactCreationWithValidData(ContactData [first_name=, last_name=Lvg
+hTNBZ])
+PASSED: testContactCreationWithValidData(ContactData [first_name=YozFxecWOLNx, l
+ast_name=])
+PASSED: testFastContactCreation(ContactData [first_name=UFKkAWhl, last_name=amAZ
+ofBNblKG])
+PASSED: testFastContactCreation(ContactData [first_name=tpUgZmdC, last_name=Weav
+rGEMunHJ])
+PASSED: testFastContactCreation(ContactData [first_name=AalhBdIX, last_name=])
+PASSED: testFastContactCreation(ContactData [first_name=mOlmMhry, last_name=])
+PASSED: testFastContactCreation(ContactData [first_name=KbvNLXiV, last_name=OldO
+JzVfdCEN])
+PASSED: testFastContactCreation(ContactData [first_name=vDkhywvs, last_name=tCuZ
+ShTTTGWz])
+PASSED: testFastContactCreation(ContactData [first_name=, last_name=])
+PASSED: testFastContactCreation(ContactData [first_name=OWyuDacf, last_name=QNNu
+eMraZmWu])
+PASSED: testFastContactCreation(ContactData [first_name=ZQPBrSZt, last_name=astz
+lWjoURXk])
+PASSED: testFastContactCreation(ContactData [first_name=wwlBrPWo, last_name=mbDU
+BEWYmjop])
+
+===============================================
+    Default test
+    Tests run: 20, Failures: 0, Skips: 0
+===============================================
+
+
+===============================================
+Default suite
+Total tests run: 20, Failures: 0, Skips: 0
+===============================================
+
+[TestNG] Time taken by org.testng.reporters.XMLReporter@503677: 10 ms
+[TestNG] Time taken by [FailedReporter passed=0 failed=0 skipped=0]: 0 ms
+[TestNG] Time taken by org.testng.reporters.SuiteHTMLReporter@40b718: 158 ms
+[TestNG] Time taken by org.testng.reporters.JUnitReportReporter@b45f54: 6 ms
+[TestNG] Time taken by org.testng.reporters.EmailableReporter2@971770: 8 ms
+[TestNG] Time taken by org.testng.reporters.jq.Main@658001: 37 ms
+
+C:\Programming4Testers\PDT18_Code\Fedor_Gorokhov_PDT18\AddressBook-JavaSE_tests>

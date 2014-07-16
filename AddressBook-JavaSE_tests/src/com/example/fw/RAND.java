@@ -4,8 +4,8 @@ import java.util.Date;
 import java.util.Random;
 
 public class RAND {
-	
-	//private Random rndd;
+
+	// private Random rndd;
 
 	static String doRandStr(String characters, int length) {
 		Random rndd = new Random();
@@ -27,7 +27,6 @@ public class RAND {
 		Integer dayStr = new Integer(strDate.split("\\.")[0]);
 		String monthStr = " " + monthNames.split("\\;")[month - 1] + " ";
 		String yearStr = (strDate.split("\\.")[2]).split(" ")[0];
-		// System.out.println(dayStr + monthStr + yearStr);
 		return (dayStr + monthStr + yearStr);
 	}
 
